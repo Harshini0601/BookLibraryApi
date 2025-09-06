@@ -169,3 +169,4 @@ D:\BookLibraryApi\obj\Debug\net9.0\refint\BookLibraryApi.dll
 D:\BookLibraryApi\obj\Debug\net9.0\BookLibraryApi.pdb
 D:\BookLibraryApi\obj\Debug\net9.0\BookLibraryApi.genruntimeconfig.cache
 D:\BookLibraryApi\obj\Debug\net9.0\ref\BookLibraryApi.dll
+D:\BookLibraryApi\obj\Debug\net9.0\BookLibraryApi.sourcelink.json

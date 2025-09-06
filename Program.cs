@@ -39,8 +39,6 @@
 // {
 //     public int TemperatureF => 32 + (int)(TemperatureC / 0.5556);
 // }
-
-
 using System.Text;
 using BookLibraryApi.Data;
 using BookLibraryApi.Middleware;
@@ -51,6 +49,8 @@ using MediatR;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
+using Microsoft.OpenApi.Models;
+
 var builder = WebApplication.CreateBuilder(args);
 var configuration = builder.Configuration;
 // EF Core - SQLite
@@ -61,10 +61,8 @@ options.UseSqlite(configuration.GetConnectionString("Default"))
 builder.Services.Configure<JwtOptions>(configuration.GetSection("Jwt"));
 // MediatR
 builder.Services.AddMediatR(typeof(Program));
-
 // FluentValidation
-builder.Services.AddControllers()
-.AddFluentValidation();
+builder.Services.AddControllers().AddFluentValidation();
 builder.Services.AddValidatorsFromAssemblyContaining<BookLibraryApi.Validators.RegisterDtoValidator>();
 // JWT Authentication
 var jwtKey = configuration["Jwt:Key"]!;
@@ -83,7 +81,8 @@ builder.Services.AddAuthentication(options =>
         ValidateAudience = true,
         ValidateIssuerSigningKey = true,
         ValidateLifetime = true,
-        ValidIssuer = jwtIssuer,
+        
+    ValidIssuer = jwtIssuer,
         ValidAudience = jwtAudience,
         IssuerSigningKey = key
     };
@@ -91,7 +90,35 @@ builder.Services.AddAuthentication(options =>
 builder.Services.AddAuthorization();
 // Swagger
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+// builder.Services.AddSwaggerGen();
+builder.Services.AddSwaggerGen(c =>
+{
+    c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+    {
+        In = ParameterLocation.Header,
+        Description = "Please enter a valid token",
+        Name = "Authorization",
+        Type = SecuritySchemeType.Http,
+        BearerFormat = "JWT",
+        Scheme = "Bearer"
+    });
+
+    c.AddSecurityRequirement(new OpenApiSecurityRequirement
+    {
+        {
+            new OpenApiSecurityScheme
+            {
+                Reference = new OpenApiReference
+                {
+                    Type = ReferenceType.SecurityScheme,
+                    Id = "Bearer"
+                }
+            },
+            new string[] {}
+        }
+    });
+});
+
 // App services
 builder.Services.AddScoped<IAuthService, AuthService>();
 var app = builder.Build();
@@ -102,6 +129,8 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+app.MapGet("/", () => Results.Redirect("/swagger"));
+
 app.UseHttpsRedirection();
 app.UseAuthentication();
 app.UseAuthorization();
