@@ -1,0 +1,14 @@
+using System;
+namespace BookLibraryApi.Entities;
+public enum BookStatus { Available, Borrowed }
+public class Book
+{
+    public Guid Id { get; set; }
+    public string Title { get; set; } = string.Empty;
+    public string Author { get; set; } = string.Empty;
+    public string Genre { get; set; } = string.Empty;
+    public BookStatus Status { get; set; } = BookStatus.Available;
+    // Nullable: only set when borrowed
+    public Guid? UserId { get; set; }
+    public User? User { get; set; }
+}
