@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<title>Book Library</title>
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+	<link rel="stylesheet" href="/styles.css" />
+</head>
+<body>
+	<header class="app-header">
+		<div class="container header-inner">
+			<h1 class="logo">📚 BookLibrary</h1>
+			<nav class="nav">
+				<button id="nav-books" class="nav-btn is-active">Books</button>
+				<button id="nav-auth" class="nav-btn">Auth</button>
+			</nav>
+			<div class="auth-state">
+				<span id="auth-user" class="muted"></span>
+				<button id="btn-logout" class="btn ghost" hidden>Logout</button>
+			</div>
+		</div>
+	</header>
+
+	<main class="container">
+		<section id="view-books" class="view">
+			<div class="card">
+				<div class="card-header">
+					<h2>Browse Books</h2>
+					<div class="filters">
+						<input id="filter-genre" placeholder="Filter by genre" />
+						<select id="filter-status">
+							<option value="">All Status</option>
+							<option value="0">Available</option>
+							<option value="1">Borrowed</option>
+						</select>
+						<button id="btn-refresh" class="btn">Refresh</button>
+					</div>
+				</div>
+				<div id="books-grid" class="grid"></div>
+			</div>
+
+			<div class="card" id="create-card" hidden>
+				<div class="card-header"><h3>Add Book</h3></div>
+				<form id="form-create" class="form">
+					<input name="title" placeholder="Title" required />
+					<input name="author" placeholder="Author" required />
+					<input name="genre" placeholder="Genre" required />
+					<button class="btn" type="submit">Create</button>
+				</form>
+			</div>
+		</section>
+
+		<section id="view-auth" class="view" hidden>
+			<div class="grid two">
+				<div class="card">
+					<div class="card-header"><h2>Register</h2></div>
+					<form id="form-register" class="form">
+						<input name="username" placeholder="Username" required />
+						<input name="email" placeholder="Email" type="email" required />
+						<input name="password" placeholder="Password" type="password" required />
+						<button class="btn" type="submit">Register</button>
+					</form>
+				</div>
+				<div class="card">
+					<div class="card-header"><h2>Login</h2></div>
+					<form id="form-login" class="form">
+						<input name="username" placeholder="Username" required />
+						<input name="password" placeholder="Password" type="password" required />
+						<button class="btn" type="submit">Login</button>
+					</form>
+				</div>
+			</div>
+		</section>
+	</main>
+
+	<footer class="footer">
+		<div class="container">Built with ❤️ on ASP.NET Core</div>
+	</footer>
+
+	<div id="toast" class="toast" hidden></div>
+	<script src="/app.js"></script>
+</body>
+</html> 

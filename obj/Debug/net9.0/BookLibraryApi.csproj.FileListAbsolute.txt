@@ -170,3 +170,7 @@ D:\BookLibraryApi\obj\Debug\net9.0\BookLibraryApi.pdb
 D:\BookLibraryApi\obj\Debug\net9.0\BookLibraryApi.genruntimeconfig.cache
 D:\BookLibraryApi\obj\Debug\net9.0\ref\BookLibraryApi.dll
 D:\BookLibraryApi\obj\Debug\net9.0\BookLibraryApi.sourcelink.json
+D:\BookLibraryApi\bin\Debug\net9.0\BookLibraryApi.staticwebassets.runtime.json
+D:\BookLibraryApi\obj\Debug\net9.0\compressed\2g823u9qpp-t7jnwzq8qt.gz
+D:\BookLibraryApi\obj\Debug\net9.0\compressed\h401h9y2xn-33s15nezqy.gz
+D:\BookLibraryApi\obj\Debug\net9.0\compressed\lc5lxjpamb-022tbvybbc.gz

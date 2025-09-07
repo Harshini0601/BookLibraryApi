@@ -129,10 +129,15 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
-app.MapGet("/", () => Results.Redirect("/swagger"));
 
 app.UseHttpsRedirection();
 app.UseAuthentication();
 app.UseAuthorization();
+
+app.UseStaticFiles();
+
 app.MapControllers();
+
+// Serve SPA
+app.MapFallbackToFile("index.html");
 app.Run();
